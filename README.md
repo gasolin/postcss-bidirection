@@ -2,9 +2,7 @@
 
 [PostCSS] plugin that polyfill Bi-directional CSS proposal to suppot direction-sensitive rules, a.k.a Left-To-Right (LTR) and Right-To-Left (RTL), in single syntax.
 
-This CSS syntax is already in production of Mozilla's [Firefox OS 2.5](https://www.mozilla.org/en-US/firefox/os/2.5/)
-It could be installed as an Android launcher. Once its started, open Settings > Language and choose an sample RTL Language to check the result.
-
+This CSS syntax is [already in production](https://github.com/mozilla-b2g/gaia/blob/master/apps/settings/style/settings.css) in Mozilla's [Firefox OS](https://www.mozilla.org/en-US/firefox/os/), which could be installed as an Android launcher. Once its started, open Settings > Language and choose an sample RTL Language to check the result.
 
 [PostCSS]: https://github.com/postcss/postcss
 [ci-img]:  https://travis-ci.org/gasolin/postcss-bidirection.svg
