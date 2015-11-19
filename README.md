@@ -1,6 +1,10 @@
 # PostCSS Bidirection [![Build Status][ci-img]][ci]
 
-[PostCSS] plugin that polyfill Mozilla's Bi-directional CSS proposal to suppot direction-sensitive rules, a.k.a Left-To-Right (LTR) and Right-To-Left (RTL), in single syntax.
+[PostCSS] plugin that polyfill Bi-directional CSS proposal to suppot direction-sensitive rules, a.k.a Left-To-Right (LTR) and Right-To-Left (RTL), in single syntax.
+
+This CSS syntax is already in production of Mozilla's [Firefox OS 2.5](https://www.mozilla.org/en-US/firefox/os/2.5/)
+It could be installed as an Android launcher. Once its started, open Settings > Language and choose an sample RTL Language to check the result.
+
 
 [PostCSS]: https://github.com/postcss/postcss
 [ci-img]:  https://travis-ci.org/gasolin/postcss-bidirection.svg
@@ -16,11 +20,17 @@ npm install --save-dev postcss-bidirection
 
 PostCSS Bidirection support syntax based on https://wiki.mozilla.org/Gaia/CSS_Guidelines
 
+### Text alignment example
+
+Input
+
 ```css
 .foo {
   text-align: start;
 }
 ```
+
+Output
 
 ```css
 .foo {
@@ -31,6 +41,53 @@ html[dir="rtl"] .foo {
   text-align: right;
 }
 ```
+
+### Padding Example
+
+Input
+
+```css
+.foo {
+  padding-inline-start: 1px;
+}
+```
+
+Output
+
+```css
+.foo {
+  padding-left: 1px;
+}
+
+html[dir="rtl"] .foo {
+  padding-right: 1px;
+}
+```
+
+## Absolute Positioning Example
+
+Input
+
+```css
+.foo {
+  offset-inline-start: 1px;
+}
+```
+
+Output
+
+```css
+.foo {
+  left: 1px;
+}
+
+html[dir="rtl"] .foo {
+  right: 1px;
+}
+```
+
+
+All supported syntax are listed below
 
 |     left/right     |     begin/end        |
 |--------------------|----------------------|
@@ -51,7 +108,7 @@ html[dir="rtl"] .foo {
 ## Usage
 
 ```js
-postcss([ require('postcss-bidi') ])
+postcss([ require('postcss-bidirection') ])
 ```
 
 See [PostCSS] docs for examples for your environment.
