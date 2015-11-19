@@ -91,17 +91,17 @@ All supported syntax are listed below
 
 |     left/right     |     begin/end        |
 |--------------------|----------------------|
-|   text alignment                          |
+|             **text alignment**            |
 | text-align: left   | text-align: start    |
 | text-align: right  | text-align: end      |
-|         padding, margin, border           |
-| padding-left       | padding-inline-start |
+|       **padding, margin, border**         |
+| padding-left       | padding-inli ne-start |
 | padding-right      | padding-inline-end   |
 | border-left        | border-inline-start  |
 | border-right       | border-inline-end    |
 | margin-left        | margin-inline-start  |
 | margin-right       | margin-inline-end    |
-|            absolute positioning           |
+|         **absolute positioning**          |
 | left               | offset-inline-start  |
 | right              | offset-inline-end    |
 
