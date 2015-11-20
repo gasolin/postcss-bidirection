@@ -14,6 +14,26 @@ This CSS syntax is [already in production](https://github.com/mozilla-b2g/gaia/b
 npm install --save-dev postcss-bidirection
 ```
 
+## Usage
+
+Install postcss-bidirection via npm:
+
+```js
+postcss([ require('postcss-bidirection') ])
+```
+
+See [PostCSS] docs for examples for your environment.
+
+To check the layout change, in your HTML file, add attribute in your html tags
+
+```
+<html dir="rtl">
+
+```
+
+Or, in your js file, set `document.dir = 'rtl'` or `document.dir = 'ltr'`.
+
+
 ## Examples
 
 PostCSS Bidirection support syntax based on https://wiki.mozilla.org/Gaia/CSS_Guidelines
@@ -102,11 +122,3 @@ All supported syntax are listed below
 |         **absolute positioning**          |
 | left               | offset-inline-start  |
 | right              | offset-inline-end    |
-
-## Usage
-
-```js
-postcss([ require('postcss-bidirection') ])
-```
-
-See [PostCSS] docs for examples for your environment.
