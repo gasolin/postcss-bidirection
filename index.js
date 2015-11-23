@@ -9,6 +9,8 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
         var start = !reverseFlag ? 'left' : 'right';
         var end = !reverseFlag ? 'right' : 'left';
         switch (decl.prop.toLowerCase()) {
+        case 'float':
+        case 'clear':
         case 'text-align':
             if(['start', 'end'].indexOf(decl.value.toLowerCase()) !== -1) {
                 if (decl.value.toLowerCase() === 'start') {

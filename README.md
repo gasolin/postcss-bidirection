@@ -112,6 +112,10 @@ All supported syntax are listed below
 |             **text alignment**            |
 | text-align: left   | text-align: start    |
 | text-align: right  | text-align: end      |
+| float: left        | float: start         |
+| float: right       | float: end           |
+| clear: left        | clear: start         |
+| clear: right       | clear: end           |
 |       **padding, margin, border**         |
 | padding-left       | padding-inli ne-start |
 | padding-right      | padding-inline-end   |
