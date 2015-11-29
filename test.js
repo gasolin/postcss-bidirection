@@ -15,7 +15,7 @@ function run(t, input, output, opts = { }) {
 
 /* text alignment */
 test('text-align start', t => {
-    var input = `.foo {
+    var input = `html[dir="ltr"] .foo {
   text-align: start;
 }
     `;
@@ -35,7 +35,7 @@ test('text-align end', t => {
   text-align: end;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   text-align: right;
 }
 
@@ -51,7 +51,7 @@ test('float start', t => {
   float: start;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   float: left;
 }
 
@@ -67,7 +67,7 @@ test('float end', t => {
   float: end;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   float: right;
 }
 
@@ -83,7 +83,7 @@ test('clear start', t => {
   clear: start;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   clear: left;
 }
 
@@ -99,7 +99,7 @@ test('clear end', t => {
   clear: end;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   clear: right;
 }
 
@@ -116,7 +116,7 @@ test('padding-inline-start', t => {
   padding-inline-start: 1px;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   padding-left: 1px;
 }
 
@@ -132,7 +132,7 @@ test('padding-inline-end', t => {
   padding-inline-end: 1px;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   padding-right: 1px;
 }
 
@@ -148,7 +148,7 @@ test('border-inline-start', t => {
   border-inline-start: 1px;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   border-left: 1px;
 }
 
@@ -164,7 +164,7 @@ test('border-inline-end', t => {
   border-inline-end: 1px;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   border-right: 1px;
 }
 
@@ -180,7 +180,7 @@ test('margin-inline-start', t => {
   margin-inline-start: 1px;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   margin-left: 1px;
 }
 
@@ -196,7 +196,7 @@ test('margin-inline-end', t => {
   margin-inline-end: 1px;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   margin-right: 1px;
 }
 
@@ -215,7 +215,7 @@ test('offset-inline-start', t => {
   offset-inline-start: 1px;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   left: 1px;
 }
 

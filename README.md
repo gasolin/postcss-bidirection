@@ -51,7 +51,7 @@ Input
 Output
 
 ```css
-.foo {
+html[dir="ltr"] .foo {
   text-align: left;
 }
 
@@ -73,7 +73,7 @@ Input
 Output
 
 ```css
-.foo {
+html[dir="ltr"] .foo {
   padding-left: 1px;
 }
 
@@ -95,7 +95,7 @@ Input
 Output
 
 ```css
-.foo {
+html[dir="ltr"] .foo {
   left: 1px;
 }
 

@@ -72,13 +72,14 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
             eachDecl(node, function (decl) {
                 resultList = processBidi(decl);
                 if (resultList[1]) {
-                // console.log(decl.prop + ' : ' + decl.value);
+                    // console.log(decl.prop + ' : ' + decl.value);
                     isBiDi = true;
                     decl = resultList[0];
                 }
             });
 
             if (isBiDi) { // is BiDi
+                node.raws.before = 'html[dir="ltr"] ';
                 rtlNode.raws.before = '\n\nhtml[dir="rtl"] ';
                 var rtlResult;
                 eachDecl(rtlNode, function transformDecl(decl) {
@@ -89,7 +90,7 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 });
                 css.insertAfter(node, rtlNode);
             }
-            // console.log(''+css.toString());
+            // console.log('' + css.raws.toString());
         });
     };
 });
