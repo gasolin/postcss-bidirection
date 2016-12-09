@@ -2,8 +2,7 @@ sudo: false
 language: node_js
 node_js:
   - stable
-  - "4"
-  - "0.12"
+  - "6"
 env:
   matrix:
   - CI_ACTION="npm test"
