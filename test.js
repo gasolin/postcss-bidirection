@@ -241,3 +241,15 @@ html[dir="rtl"] .foo {
     `;
     return run(t, input, output, { });
 });
+
+test('do not do anything on other rules', t => {
+    var input = `.foo {
+  margin-top: 1px
+}
+    `;
+    var output = `.foo {
+  margin-top: 1px
+}
+    `;
+    return run(t, input, output, { });
+});

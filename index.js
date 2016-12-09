@@ -4,9 +4,9 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
     opts = opts || {};
 
     function processProps(decl, reverseFlag) {
-        var isDirty = false;
-        var start = !reverseFlag ? 'left' : 'right';
-        var end = !reverseFlag ? 'right' : 'left';
+        let isDirty = false;
+        let start = !reverseFlag ? 'left' : 'right';
+        let end = !reverseFlag ? 'right' : 'left';
         switch (decl.prop.toLowerCase()) {
         case 'float':
         case 'clear':
@@ -76,7 +76,8 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                     rule:     item,
                     nodes:    [],
                     rtlRule:  rtlRule,
-                    rtlNodes: []
+                    rtlNodes: [],
+                    isBidi:   false
                 };
                 currentIdx = idx;
                 idx += 1;
@@ -99,28 +100,31 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 resultList = processProps(decl);
                 if (resultList[1]) {
                     decl = resultList[0];
+                    item.isBiDi = true;
                 }
             });
         });
 
         tree.forEach((item) => {
-            item.rule.raws.before += 'html[dir="ltr"] ';
-            item.rtlRule.raws.before = '\n\nhtml[dir="rtl"] ';
-            for ( let i in item.rtlRule ) {
-                if ( !item.rtlRule.hasOwnProperty(i) ) continue;
-                let value = item.rtlRule[i];
-                if ( value instanceof Array ) {
-                    item.rtlRule[i] = item.rtlNodes.map(decl => {
-                        resultList = processProps(decl, true);
-                        if (resultList[1]) {
-                            return resultList[0];
-                        } else {
-                            return decl;
-                        }
-                    });
+            if (item.isBiDi) {
+                item.rule.raws.before += 'html[dir="ltr"] ';
+                item.rtlRule.raws.before = '\n\nhtml[dir="rtl"] ';
+                for ( let i in item.rtlRule ) {
+                    if ( !item.rtlRule.hasOwnProperty(i) ) continue;
+                    let value = item.rtlRule[i];
+                    if ( value instanceof Array ) {
+                        item.rtlRule[i] = item.rtlNodes.map(decl => {
+                            resultList = processProps(decl, true);
+                            if (resultList[1]) {
+                                return resultList[0];
+                            } else {
+                                return decl;
+                            }
+                        });
+                    }
                 }
+                root.insertAfter(item.rule, item.rtlRule);
             }
-            root.insertAfter(item.rule, item.rtlRule);
         });
     };
 });
