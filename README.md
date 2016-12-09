@@ -126,3 +126,19 @@ All supported syntax are listed below
 |         **absolute positioning**          |
 | left               | offset-inline-start  |
 | right              | offset-inline-end    |
+
+
+## Debugging
+
+Install postcss-debug
+
+```sh
+npm install -g postcss-debug
+```
+
+Then run postcss-debug with command
+
+```sh
+postcss-debug sample.css
+```
+
