@@ -72,8 +72,12 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
         root.walk(function (item) {
             if (item.type === 'rule') {
                 rtlRule = item.clone();
-                tree[idx] = { rule: item, nodes: [],
-                    rtlRule: rtlRule, rtlNodes: [] };
+                tree[idx] = {
+                    rule:     item,
+                    nodes:    [],
+                    rtlRule:  rtlRule,
+                    rtlNodes: []
+                };
                 currentIdx = idx;
                 idx += 1;
             } else if (item.type === 'decl') {
