@@ -242,13 +242,45 @@ html[dir="rtl"] .foo {
     return run(t, input, output, { });
 });
 
-test('do not do anything on other rules', t => {
+test('do not do anything on unaffected rules', t => {
     var input = `.foo {
   margin-top: 1px
 }
     `;
     var output = `.foo {
   margin-top: 1px
+}
+    `;
+    return run(t, input, output, { });
+});
+
+test('normal rules with bidi rules should display correctly', t => {
+    var input = `.sources-header {
+  height: 30px;
+  border-bottom: 1px solid var(--theme-splitter-color);
+  padding-top: 0px;
+  padding-bottom: 0px;
+  line-height: 30px;
+}
+
+.sources-header {
+  padding-inline-start: 10px;
+}
+    `;
+    var output = `.sources-header {
+  height: 30px;
+  border-bottom: 1px solid var(--theme-splitter-color);
+  padding-top: 0px;
+  padding-bottom: 0px;
+  line-height: 30px;
+}
+
+html[dir="ltr"] .sources-header {
+  padding-left: 10px;
+}
+
+html[dir="rtl"] .sources-header {
+  padding-right: 10px;
 }
     `;
     return run(t, input, output, { });

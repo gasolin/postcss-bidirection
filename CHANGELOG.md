@@ -1,3 +1,7 @@
+2.0.3 2016/12/10
+
+* fix dir=rtl rules when there's normal rules and bi-direction rules coexist.
+
 2.0.2 2016/12/9
 
 * rewrite to fix `node.each` API missing in recent postcss version, make it work again.

@@ -72,6 +72,9 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
         root.walk(function (item) {
             if (item.type === 'rule') {
                 rtlRule = item.clone();
+                rtlRule.raws.before = item.raws.before;
+                rtlRule.raws.after = item.raws.after;
+                rtlRule.raws.between = item.raws.between;
                 tree[idx] = {
                     rule:     item,
                     nodes:    [],
@@ -108,11 +111,10 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
         tree.forEach((item) => {
             if (item.isBiDi) {
                 item.rule.raws.before += 'html[dir="ltr"] ';
-                item.rtlRule.raws.before = '\n\nhtml[dir="rtl"] ';
+                // modified from postcss internal clone method
                 for ( let i in item.rtlRule ) {
                     if ( !item.rtlRule.hasOwnProperty(i) ) continue;
-                    let value = item.rtlRule[i];
-                    if ( value instanceof Array ) {
+                    if ( item.rtlRule[i] instanceof Array ) {
                         item.rtlRule[i] = item.rtlNodes.map(decl => {
                             resultList = processProps(decl, true);
                             if (resultList[1]) {
@@ -124,6 +126,10 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                     }
                 }
                 root.insertAfter(item.rule, item.rtlRule);
+                // overwrite rtlRule.raws.before since its been lazy evaluated
+                item.rtlRule.raws.before = '\n\nhtml[dir="rtl"] ';
+                // console.log('<', item.rule.raws.before,
+                //     '>', item.rtlRule.raws.before);
             }
         });
     };
