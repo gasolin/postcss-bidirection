@@ -1,0 +1,55 @@
+.foo {
+  text-align: start;
+}
+
+.foo {
+  text-align: end;
+}
+
+.foo {
+  float: start;
+}
+
+.foo {
+  float: end;
+}
+
+.foo {
+  clear: start;
+}
+
+.foo {
+  clear: end;
+}
+
+.foo {
+  padding-inline-start: 1px;
+}
+
+.foo {
+  padding-inline-end: 1px;
+}
+
+.foo {
+  border-inline-start: 1px;
+}
+
+.foo {
+  border-inline-end: 1px;
+}
+
+.foo {
+  margin-inline-start: 1px;
+}
+
+.foo {
+  margin-inline-end: 1px;
+}
+
+.foo {
+  offset-inline-start: 1px;
+}
+
+.foo {
+  offset-inline-end: 1px;
+}

@@ -1,6 +1,7 @@
 2.0 2016/12/9
 
 * rewrite to fix `node.each` API missing in recent postcss version, make it work again.
+* add configuration and samples for `postcss-debug`
 
 1.2 2015/11/29
 
