@@ -1,11 +1,15 @@
+2.0 2016/12/9
+
+* rewrite to fix `node.each` API missing in recent postcss version, make it work again.
+
 1.2 2015/11/29
 
-generate both LTR and RTL prefix for affected syntaxes.
+* generate both LTR and RTL prefix for affected syntaxes.
 
 1.1 2015/11/23
 
-support float and clear property
+* support float and clear property
 
 1.0 2015/11/19
 
-init relase version
+* init relase version

@@ -15,11 +15,11 @@ function run(t, input, output, opts = { }) {
 
 /* text alignment */
 test('text-align start', t => {
-    var input = `html[dir="ltr"] .foo {
+    var input = `.foo {
   text-align: start;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   text-align: left;
 }
 
@@ -231,7 +231,7 @@ test('offset-inline-end', t => {
   offset-inline-end: 1px;
 }
     `;
-    var output = `.foo {
+    var output = `html[dir="ltr"] .foo {
   right: 1px;
 }
 

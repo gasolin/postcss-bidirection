@@ -1,10 +1,9 @@
 var postcss = require('postcss');
-var eachDecl = require('postcss-each-decl');
 
 module.exports = postcss.plugin('postcss-bidirection', function (opts) {
     opts = opts || {};
 
-    function processBidi(decl, reverseFlag) {
+    function processProps(decl, reverseFlag) {
         var isDirty = false;
         var start = !reverseFlag ? 'left' : 'right';
         var end = !reverseFlag ? 'right' : 'left';
@@ -62,35 +61,62 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
 
     // Work with options here
 
-    return function (css) {
+    return function (root) {
+        let tree = [];
+        let idx = 0;
+        let currentIdx;
+        let rtlRule;
+        let rtlItem;
+
+        // Rebuild tree for reuse
+        root.walk(function (item) {
+            if (item.type === 'rule') {
+                rtlRule = item.clone();
+                tree[idx] = { rule: item, nodes: [],
+                    rtlRule: rtlRule, rtlNodes: [] };
+                currentIdx = idx;
+                idx += 1;
+            } else if (item.type === 'decl') {
+                tree[currentIdx].nodes.push(item);
+                rtlItem = item.clone();
+                rtlItem.raws.before = item.raws.before;
+                rtlItem.raws.after = item.raws.after;
+                rtlItem.raws.between = item.raws.between;
+                tree[currentIdx].rtlNodes.push(rtlItem);
+            }
+        });
 
         // Transform CSS AST here
-        css.walk(function (node) {
-            var resultList;
-            var isBiDi = false;
-            var rtlNode = node.clone();
-            eachDecl(node, function (decl) {
-                resultList = processBidi(decl);
+        // Unefficient but works
+
+        let resultList;
+        tree.forEach(item => {
+            item.nodes.forEach(decl => {
+                resultList = processProps(decl);
                 if (resultList[1]) {
-                    // console.log(decl.prop + ' : ' + decl.value);
-                    isBiDi = true;
                     decl = resultList[0];
                 }
             });
+        });
 
-            if (isBiDi) { // is BiDi
-                node.raws.before = 'html[dir="ltr"] ';
-                rtlNode.raws.before = '\n\nhtml[dir="rtl"] ';
-                var rtlResult;
-                eachDecl(rtlNode, function transformDecl(decl) {
-                    rtlResult = processBidi(decl, true);
-                    if (rtlResult[1]) {
-                        decl = rtlResult[0];
-                    }
-                });
-                css.insertAfter(node, rtlNode);
+        tree.forEach((item) => {
+            item.rule.raws.before += 'html[dir="ltr"] ';
+            item.rtlRule.raws.before = '\n\nhtml[dir="rtl"] ';
+            for ( let i in item.rtlRule ) {
+                if ( !item.rtlRule.hasOwnProperty(i) ) continue;
+                let value = item.rtlRule[i];
+                if ( value instanceof Array ) {
+                    item.rtlRule[i] = item.rtlNodes.map(decl => {
+                        resultList = processProps(decl, true);
+                        if (resultList[1]) {
+                            return resultList[0];
+                        } else {
+                            return decl;
+                        }
+                    });
+                }
             }
-            // console.log('' + css.raws.toString());
+            root.insertAfter(item.rule, item.rtlRule);
         });
     };
 });

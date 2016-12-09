@@ -1,6 +1,6 @@
 {
   "name": "postcss-bidirection",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "PostCSS plugin that polyfill Mozilla's Bi-directional CSS proposal to suppot direction-sensitive rules, a.k.a Left-To-Right (LTR) and Right-To-Left (RTL), in single syntax",
   "keywords": [
     "postcss",
@@ -18,8 +18,7 @@
   },
   "homepage": "https://github.com/gasolin/postcss-bidirection",
   "dependencies": {
-    "postcss": "^5.0.10",
-    "postcss-each-decl": "^1.0.2"
+    "postcss": "^5.0.10"
   },
   "devDependencies": {
     "ava": "^0.4.2",
