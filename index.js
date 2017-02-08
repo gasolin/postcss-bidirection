@@ -98,6 +98,7 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
         // Unefficient but works
 
         let resultList;
+        // LTR
         tree.forEach(item => {
             item.nodes.forEach(decl => {
                 resultList = processProps(decl);
@@ -108,9 +109,9 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
             });
         });
 
+        // RTL
         tree.forEach((item) => {
             if (item.isBiDi) {
-                item.rule.raws.before += 'html[dir="ltr"] ';
                 // modified from postcss internal clone method
                 for ( let i in item.rtlRule ) {
                     if ( !item.rtlRule.hasOwnProperty(i) ) continue;
@@ -119,8 +120,6 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                             resultList = processProps(decl, true);
                             if (resultList[1]) {
                                 return resultList[0];
-                            } else {
-                                return decl;
                             }
                         });
                     }

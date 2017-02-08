@@ -19,7 +19,7 @@ test('text-align start', t => {
   text-align: start;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   text-align: left;
 }
 
@@ -35,7 +35,7 @@ test('text-align end', t => {
   text-align: end;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   text-align: right;
 }
 
@@ -51,7 +51,7 @@ test('float start', t => {
   float: start;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   float: left;
 }
 
@@ -67,7 +67,7 @@ test('float end', t => {
   float: end;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   float: right;
 }
 
@@ -83,7 +83,7 @@ test('clear start', t => {
   clear: start;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   clear: left;
 }
 
@@ -99,7 +99,7 @@ test('clear end', t => {
   clear: end;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   clear: right;
 }
 
@@ -116,7 +116,7 @@ test('padding-inline-start', t => {
   padding-inline-start: 1px;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   padding-left: 1px;
 }
 
@@ -132,7 +132,7 @@ test('padding-inline-end', t => {
   padding-inline-end: 1px;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   padding-right: 1px;
 }
 
@@ -148,7 +148,7 @@ test('border-inline-start', t => {
   border-inline-start: 1px;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   border-left: 1px;
 }
 
@@ -164,7 +164,7 @@ test('border-inline-end', t => {
   border-inline-end: 1px;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   border-right: 1px;
 }
 
@@ -180,7 +180,7 @@ test('margin-inline-start', t => {
   margin-inline-start: 1px;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   margin-left: 1px;
 }
 
@@ -196,7 +196,7 @@ test('margin-inline-end', t => {
   margin-inline-end: 1px;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   margin-right: 1px;
 }
 
@@ -215,7 +215,7 @@ test('offset-inline-start', t => {
   offset-inline-start: 1px;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   left: 1px;
 }
 
@@ -231,7 +231,7 @@ test('offset-inline-end', t => {
   offset-inline-end: 1px;
 }
     `;
-    var output = `html[dir="ltr"] .foo {
+    var output = `.foo {
   right: 1px;
 }
 
@@ -275,12 +275,30 @@ test('normal rules with bidi rules should display correctly', t => {
   line-height: 30px;
 }
 
-html[dir="ltr"] .sources-header {
+.sources-header {
   padding-left: 10px;
 }
 
 html[dir="rtl"] .sources-header {
   padding-right: 10px;
+}
+    `;
+    return run(t, input, output, { });
+});
+
+test('should only render affected styles into rtl rules', t => {
+    var input = `.toggle-button-end {
+  top: 7px;
+  offset-inline-end: 0;
+}
+    `;
+    var output = `.toggle-button-end {
+  top: 7px;
+  right: 0;
+}
+
+html[dir="rtl"] .toggle-button-end {
+  left: 0;
 }
     `;
     return run(t, input, output, { });
