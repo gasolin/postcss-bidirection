@@ -1,6 +1,20 @@
 import postcss from 'postcss';
 import test    from 'ava';
-import plugin  from './';
+import plugin  from '../';
+import fs from "fs";
+
+
+function read(name) {
+   function _read(name) {
+     return fs.readFileSync(`./fixtures/${name}.css`, {
+       encoding: 'utf8'
+     });
+   }
+   const input = _read(`${name}-input`);
+   const output = _read(`${name}-output`);
+
+   return {input, output};
+}
 
 
 function run(t, input, output, opts = { }) {
@@ -8,27 +22,13 @@ function run(t, input, output, opts = { }) {
         .then(result => {
             t.same(result.css, output);
             t.same(result.warnings().length, 0);
-        }).catch(function (error) {
+        })
+        .catch(function (error) {
+            t.fail()
             console.error(error);
         });
 }
 
-/* text alignment */
-test('text-align start', t => {
-    var input = `.foo {
-  text-align: start;
-}
-    `;
-    var output = `.foo {
-  text-align: left;
-}
-
-html[dir="rtl"] .foo {
-  text-align: right;
-}
-    `;
-    return run(t, input, output, { });
-});
 
 test('text-align end', t => {
     var input = `.foo {
@@ -110,7 +110,6 @@ html[dir="rtl"] .foo {
     return run(t, input, output, { });
 });
 
-/* padding, margin, border */
 test('padding-inline-start', t => {
     var input = `.foo {
   padding-inline-start: 1px;
@@ -207,9 +206,6 @@ html[dir="rtl"] .foo {
     return run(t, input, output, { });
 });
 
-/* padding-block-start */
-
-/* absolute positioning */
 test('offset-inline-start', t => {
     var input = `.foo {
   offset-inline-start: 1px;
@@ -254,52 +250,27 @@ test('do not do anything on unaffected rules', t => {
     return run(t, input, output, { });
 });
 
-test('normal rules with bidi rules should display correctly', t => {
-    var input = `.sources-header {
-  height: 30px;
-  border-bottom: 1px solid var(--theme-splitter-color);
-  padding-top: 0px;
-  padding-bottom: 0px;
-  line-height: 30px;
-}
 
-.sources-header {
-  padding-inline-start: 10px;
-}
-    `;
-    var output = `.sources-header {
-  height: 30px;
-  border-bottom: 1px solid var(--theme-splitter-color);
-  padding-top: 0px;
-  padding-bottom: 0px;
-  line-height: 30px;
-}
 
-.sources-header {
-  padding-left: 10px;
-}
 
-html[dir="rtl"] .sources-header {
-  padding-right: 10px;
-}
-    `;
+test('should only render affected styles into rtl rules', t => {
+    const {input, output} = read("t1")
     return run(t, input, output, { });
 });
 
-test('should only render affected styles into rtl rules', t => {
-    var input = `.toggle-button-end {
-  top: 7px;
-  offset-inline-end: 0;
-}
-    `;
-    var output = `.toggle-button-end {
-  top: 7px;
-  right: 0;
-}
 
-html[dir="rtl"] .toggle-button-end {
-  left: 0;
-}
-    `;
+test('codemirror', t => {
+    const {input, output} = read("codemirror")
+    return run(t, input, output, { });
+});
+
+
+test('normal rules with bidi rules should display correctly', t => {
+    const {input, output} = read("normal")
+    return run(t, input, output, { });
+});
+
+test('text-align start', t => {
+    const {input, output} = read("text-align")
     return run(t, input, output, { });
 });

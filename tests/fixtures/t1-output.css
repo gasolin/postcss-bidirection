@@ -1,0 +1,8 @@
+.toggle-button-end {
+  top: 7px;
+  right: 0;
+}
+
+html[dir="rtl"] .toggle-button-end {
+  left: 0;
+}
