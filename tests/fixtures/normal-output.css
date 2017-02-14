@@ -1,0 +1,15 @@
+.sources-header {
+  height: 30px;
+  border-bottom: 1px solid var(--theme-splitter-color);
+  padding-top: 0px;
+  padding-bottom: 0px;
+  line-height: 30px;
+}
+
+.sources-header {
+  padding-left: 10px;
+}
+
+html[dir="rtl"] .sources-header {
+  padding-right: 10px;
+}
