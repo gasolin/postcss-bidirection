@@ -1,12 +1,14 @@
 var postcss = require('postcss');
 
+const DEBUG = false;
+
 function log(...args) {
     (args || []).forEach(arg => {
-        console.log(JSON.stringify(arg, null, 2));
+        if (DEBUG) console.log(JSON.stringify(arg, null, 2));
     });
 }
 
-function cloneItem(item) {
+function cloneRtlItem(item) {
     let rtlRule = item.clone();
     rtlRule.raws.before = item.raws.before;
     rtlRule.raws.after = item.raws.after;
@@ -68,12 +70,14 @@ function processProps(decl, reverseFlag) {
     default:
         break;
     }
-        // if (isDirty) console.log(decl.prop + ' : ' + decl.value);
+
+    if (isDirty) log(decl.prop + ' : ' + decl.value);
+
     const newDecl = decl;
     return { newDecl, isDirty };
 }
 
-function updateRule(item) {
+function updateRtlRule(item) {
     return item.rtlNodes.map(decl => {
         const { newDecl, isDirty } = processProps(decl, true);
         if (isDirty) {
@@ -82,14 +86,14 @@ function updateRule(item) {
     });
 }
 
-function updateItem(item) {
+function updateRtlItem(item) {
     for ( let i in item.rtlRule ) {
         if ( !item.rtlRule.hasOwnProperty(i) ) {
             continue;
         }
 
         if ( item.rtlRule[i] instanceof Array ) {
-            item.rtlRule[i] = updateRule(item);
+            item.rtlRule[i] = updateRtlRule(item);
         }
     }
 
@@ -113,7 +117,7 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 tree[idx] = {
                     rule:     item,
                     nodes:    [],
-                    rtlRule:  cloneItem(item),
+                    rtlRule:  cloneRtlItem(item),
                     rtlNodes: [],
                     isBiDi:   false
                 };
@@ -121,7 +125,7 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 idx += 1;
             } else if (item.type === 'decl') {
                 tree[currentIdx].nodes.push(item);
-                tree[currentIdx].rtlNodes.push(cloneItem(item));
+                tree[currentIdx].rtlNodes.push(cloneRtlItem(item));
             }
         });
 
@@ -143,13 +147,14 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
         tree.forEach((item) => {
             if (item.isBiDi) {
                 // modified from postcss internal clone method
-                updateItem(item);
+                updateRtlItem(item);
 
                 root.insertAfter(item.rule, item.rtlRule);
                 // overwrite rtlRule.raws.before since its been lazy evaluated
                 item.rtlRule.raws.before = '\n\nhtml[dir="rtl"] ';
-                // console.log('<', item.rule.raws.before,
-                //     '>', item.rtlRule.raws.before);
+
+                log('<', item.rule.raws.before,
+                    '>', item.rtlRule.raws.before);
             }
         });
     };
