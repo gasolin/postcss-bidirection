@@ -1,3 +1,12 @@
+Working in progress
+
+* refactor
+* add npm badge
+
+2.1 2017/2/8
+
+* treat ltr as default and only render affected styles into rtl rules
+
 2.0.3 2016/12/10
 
 * fix dir=rtl rules when there's normal rules and bi-direction rules coexist.
