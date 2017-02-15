@@ -270,3 +270,8 @@ test('text-align start', t => {
     const { input, output } = read('text-align');
     return run(t, input, output, { });
 });
+
+test('should render rtl before each multi-selector rule', t => {
+    const { input, output } = read('multi-selectors');
+    return run(t, input, output, { });
+});

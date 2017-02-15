@@ -1,8 +1,9 @@
-2.2 2017/2/15
+2.3 2017/2/15
 
 * refactor
 * add npm badge
 * support rules with non-bidi declarations
+* support multiple selectors in a rule
 
 2.1 2017/2/8
 
