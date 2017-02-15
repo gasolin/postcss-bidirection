@@ -150,8 +150,16 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 updateRtlItem(item);
 
                 root.insertAfter(item.rule, item.rtlRule);
+
                 // overwrite rtlRule.raws.before since its been lazy evaluated
                 item.rtlRule.raws.before = '\n\nhtml[dir="rtl"] ';
+
+                // multiple selectors in a rule
+                let selectors = item.rtlRule.selector.split(/\s*[,\n]+\s*/);
+                if (selectors.length) {
+                    item.rtlRule.selector =
+                      selectors.join(',\nhtml[dir="rtl"] ');
+                }
 
                 log('<', item.rule.raws.before,
                     '>', item.rtlRule.raws.before);
