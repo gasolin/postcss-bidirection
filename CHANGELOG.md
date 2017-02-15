@@ -1,7 +1,8 @@
-Working in progress
+2.2 2017/2/15
 
 * refactor
 * add npm badge
+* support rules with non-bidi declarations
 
 2.1 2017/2/8
 

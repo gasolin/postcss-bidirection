@@ -78,7 +78,7 @@ function processProps(decl, reverseFlag) {
 }
 
 function updateRtlRule(item) {
-    return item.rtlNodes.map(decl => {
+    return item.rtlNodes.filter(decl => {
         const { newDecl, isDirty } = processProps(decl, true);
         if (isDirty) {
             return newDecl;

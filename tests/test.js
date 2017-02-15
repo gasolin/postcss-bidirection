@@ -251,8 +251,6 @@ test('do not do anything on unaffected rules', t => {
 });
 
 
-
-
 test('should only render affected styles into rtl rules', t => {
     const {input, output} = read("t1")
     return run(t, input, output, { });
