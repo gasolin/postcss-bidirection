@@ -250,25 +250,23 @@ test('do not do anything on unaffected rules', t => {
     return run(t, input, output, { });
 });
 
-
 test('should only render affected styles into rtl rules', t => {
-    const {input, output} = read("t1")
+    const { input, output } = read('t1');
     return run(t, input, output, { });
 });
 
 
 test('codemirror', t => {
-    const {input, output} = read("codemirror")
+    const { input, output } = read('codemirror');
     return run(t, input, output, { });
 });
 
-
 test('normal rules with bidi rules should display correctly', t => {
-    const {input, output} = read("normal")
+    const { input, output } = read('normal');
     return run(t, input, output, { });
 });
 
 test('text-align start', t => {
-    const {input, output} = read("text-align")
+    const { input, output } = read('text-align');
     return run(t, input, output, { });
 });
