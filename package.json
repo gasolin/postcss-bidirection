@@ -26,6 +26,6 @@
   },
   "scripts": {
     "test": "ava tests",
-    "lint": "eslint *.js"
+    "lint": "eslint **/*.js"
   }
 }
