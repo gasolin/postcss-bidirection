@@ -1,19 +1,19 @@
 import postcss from 'postcss';
 import test    from 'ava';
 import plugin  from '../';
-import fs from "fs";
+import fs from 'fs';
 
 
 function read(name) {
-   function _read(name) {
-     return fs.readFileSync(`./fixtures/${name}.css`, {
-       encoding: 'utf8'
-     });
-   }
-   const input = _read(`${name}-input`);
-   const output = _read(`${name}-output`);
+    function _read(ele) {
+        return fs.readFileSync(`./fixtures/${ele}.css`, {
+            encoding: 'utf8'
+        });
+    }
+    const input = _read(`${name}-input`);
+    const output = _read(`${name}-output`);
 
-   return {input, output};
+    return { input, output };
 }
 
 
@@ -24,7 +24,7 @@ function run(t, input, output, opts = { }) {
             t.same(result.warnings().length, 0);
         })
         .catch(function (error) {
-            t.fail()
+            t.fail();
             console.error(error);
         });
 }
