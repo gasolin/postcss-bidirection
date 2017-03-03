@@ -32,8 +32,8 @@ function processProps(decl, reverseFlag) {
             } else {
                 decl.value = end;
             }
+            isDirty = true;
         }
-        isDirty = true;
         break;
     case 'padding-inline-start':
         decl.prop = 'padding-' + start;
