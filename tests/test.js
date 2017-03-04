@@ -250,12 +250,6 @@ test('do not do anything on unaffected rules', t => {
     return run(t, input, output, { });
 });
 
-test('should only render affected styles into rtl rules', t => {
-    const { input, output } = read('t1');
-    return run(t, input, output, { });
-});
-
-
 test('codemirror', t => {
     const { input, output } = read('codemirror');
     return run(t, input, output, { });
@@ -263,6 +257,11 @@ test('codemirror', t => {
 
 test('normal rules with bidi rules should display correctly', t => {
     const { input, output } = read('normal');
+    return run(t, input, output, { });
+});
+
+test('should only render affected styles into rtl rules', t => {
+    const { input, output } = read('normal2');
     return run(t, input, output, { });
 });
 
