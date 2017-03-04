@@ -1,0 +1,15 @@
+.foo {
+  margin-left: 1px;
+}
+
+html[dir="rtl"] .foo {
+  margin-right: 1px;
+}
+
+.bar {
+  margin-right: 1px;
+}
+
+html[dir="rtl"] .bar {
+  margin-left: 1px;
+}

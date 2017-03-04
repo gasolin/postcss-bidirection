@@ -55,35 +55,8 @@ test('border', t => {
     return run(t, input, output, { });
 });
 
-test('margin-inline-start', t => {
-    var input = `.foo {
-  margin-inline-start: 1px;
-}
-    `;
-    var output = `.foo {
-  margin-left: 1px;
-}
-
-html[dir="rtl"] .foo {
-  margin-right: 1px;
-}
-    `;
-    return run(t, input, output, { });
-});
-
-test('margin-inline-end', t => {
-    var input = `.foo {
-  margin-inline-end: 1px;
-}
-    `;
-    var output = `.foo {
-  margin-right: 1px;
-}
-
-html[dir="rtl"] .foo {
-  margin-left: 1px;
-}
-    `;
+test('margin', t => {
+    const { input, output } = read('margin');
     return run(t, input, output, { });
 });
 
