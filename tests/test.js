@@ -30,19 +30,13 @@ function run(t, input, output, opts = { }) {
 }
 
 
-test('text-align end', t => {
-    var input = `.foo {
-  text-align: end;
-}
-    `;
-    var output = `.foo {
-  text-align: right;
-}
+test('text-align start', t => {
+    const { input, output } = read('text-align-start');
+    return run(t, input, output, { });
+});
 
-html[dir="rtl"] .foo {
-  text-align: left;
-}
-    `;
+test('text-align end', t => {
+    const { input, output } = read('text-align-end');
     return run(t, input, output, { });
 });
 
@@ -262,11 +256,6 @@ test('normal rules with bidi rules should display correctly', t => {
 
 test('should only render affected styles into rtl rules', t => {
     const { input, output } = read('normal2');
-    return run(t, input, output, { });
-});
-
-test('text-align start', t => {
-    const { input, output } = read('text-align');
     return run(t, input, output, { });
 });
 

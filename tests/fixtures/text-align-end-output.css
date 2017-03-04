@@ -1,0 +1,7 @@
+.foo {
+  text-align: right;
+}
+
+html[dir="rtl"] .foo {
+  text-align: left;
+}
