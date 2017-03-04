@@ -40,35 +40,8 @@ test('float', t => {
     return run(t, input, output, { });
 });
 
-test('clear start', t => {
-    var input = `.foo {
-  clear: start;
-}
-    `;
-    var output = `.foo {
-  clear: left;
-}
-
-html[dir="rtl"] .foo {
-  clear: right;
-}
-    `;
-    return run(t, input, output, { });
-});
-
-test('clear end', t => {
-    var input = `.foo {
-  clear: end;
-}
-    `;
-    var output = `.foo {
-  clear: right;
-}
-
-html[dir="rtl"] .foo {
-  clear: left;
-}
-    `;
+test('clear', t => {
+    const { input, output } = read('clear');
     return run(t, input, output, { });
 });
 

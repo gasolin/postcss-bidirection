@@ -1,0 +1,15 @@
+.foo {
+  clear: left;
+}
+
+html[dir="rtl"] .foo {
+  clear: right;
+}
+
+.bar {
+  clear: right;
+}
+
+html[dir="rtl"] .bar {
+  clear: left;
+}
