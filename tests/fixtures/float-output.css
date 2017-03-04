@@ -1,0 +1,15 @@
+.foo {
+  float: left;
+}
+
+html[dir="rtl"] .foo {
+  float: right;
+}
+
+.bar {
+  float: right;
+}
+
+html[dir="rtl"] .bar {
+  float: left;
+}

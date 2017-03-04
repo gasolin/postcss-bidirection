@@ -35,35 +35,8 @@ test('text-align', t => {
     return run(t, input, output, { });
 });
 
-test('float start', t => {
-    var input = `.foo {
-  float: start;
-}
-    `;
-    var output = `.foo {
-  float: left;
-}
-
-html[dir="rtl"] .foo {
-  float: right;
-}
-    `;
-    return run(t, input, output, { });
-});
-
-test('float end', t => {
-    var input = `.foo {
-  float: end;
-}
-    `;
-    var output = `.foo {
-  float: right;
-}
-
-html[dir="rtl"] .foo {
-  float: left;
-}
-    `;
+test('float', t => {
+    const { input, output } = read('float');
     return run(t, input, output, { });
 });
 
