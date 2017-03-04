@@ -45,35 +45,8 @@ test('clear', t => {
     return run(t, input, output, { });
 });
 
-test('padding-inline-start', t => {
-    var input = `.foo {
-  padding-inline-start: 1px;
-}
-    `;
-    var output = `.foo {
-  padding-left: 1px;
-}
-
-html[dir="rtl"] .foo {
-  padding-right: 1px;
-}
-    `;
-    return run(t, input, output, { });
-});
-
-test('padding-inline-end', t => {
-    var input = `.foo {
-  padding-inline-end: 1px;
-}
-    `;
-    var output = `.foo {
-  padding-right: 1px;
-}
-
-html[dir="rtl"] .foo {
-  padding-left: 1px;
-}
-    `;
+test('padding', t => {
+    const { input, output } = read('padding');
     return run(t, input, output, { });
 });
 

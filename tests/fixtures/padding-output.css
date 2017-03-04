@@ -1,0 +1,15 @@
+.foo {
+  padding-left: 1px;
+}
+
+html[dir="rtl"] .foo {
+  padding-right: 1px;
+}
+
+.bar {
+  padding-right: 1px;
+}
+
+html[dir="rtl"] .bar {
+  padding-left: 1px;
+}
