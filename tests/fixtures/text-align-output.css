@@ -1,0 +1,15 @@
+.foo {
+  text-align: left;
+}
+
+html[dir="rtl"] .foo {
+  text-align: right;
+}
+
+.bar {
+  text-align: right;
+}
+
+html[dir="rtl"] .bar {
+  text-align: left;
+}

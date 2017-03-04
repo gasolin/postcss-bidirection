@@ -1,3 +1,7 @@
 .foo {
   text-align: start;
 }
+
+.bar {
+  text-align: end;
+}

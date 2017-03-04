@@ -30,13 +30,8 @@ function run(t, input, output, opts = { }) {
 }
 
 
-test('text-align start', t => {
-    const { input, output } = read('text-align-start');
-    return run(t, input, output, { });
-});
-
-test('text-align end', t => {
-    const { input, output } = read('text-align-end');
+test('text-align', t => {
+    const { input, output } = read('text-align');
     return run(t, input, output, { });
 });
 
