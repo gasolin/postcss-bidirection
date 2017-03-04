@@ -45,50 +45,23 @@ test('clear', t => {
     return run(t, input, output, { });
 });
 
-test('padding', t => {
+test('padding-inline-(start/end)', t => {
     const { input, output } = read('padding');
     return run(t, input, output, { });
 });
 
-test('border', t => {
+test('border-inline-(start/end)', t => {
     const { input, output } = read('border');
     return run(t, input, output, { });
 });
 
-test('margin', t => {
+test('margin-inline-(start/end)', t => {
     const { input, output } = read('margin');
     return run(t, input, output, { });
 });
 
-test('offset-inline-start', t => {
-    var input = `.foo {
-  offset-inline-start: 1px;
-}
-    `;
-    var output = `.foo {
-  left: 1px;
-}
-
-html[dir="rtl"] .foo {
-  right: 1px;
-}
-    `;
-    return run(t, input, output, { });
-});
-
-test('offset-inline-end', t => {
-    var input = `.foo {
-  offset-inline-end: 1px;
-}
-    `;
-    var output = `.foo {
-  right: 1px;
-}
-
-html[dir="rtl"] .foo {
-  left: 1px;
-}
-    `;
+test('offset-inline-(start/end)', t => {
+    const { input, output } = read('offset-inline');
     return run(t, input, output, { });
 });
 
