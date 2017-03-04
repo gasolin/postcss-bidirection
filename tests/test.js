@@ -50,35 +50,8 @@ test('padding', t => {
     return run(t, input, output, { });
 });
 
-test('border-inline-start', t => {
-    var input = `.foo {
-  border-inline-start: 1px;
-}
-    `;
-    var output = `.foo {
-  border-left: 1px;
-}
-
-html[dir="rtl"] .foo {
-  border-right: 1px;
-}
-    `;
-    return run(t, input, output, { });
-});
-
-test('border-inline-end', t => {
-    var input = `.foo {
-  border-inline-end: 1px;
-}
-    `;
-    var output = `.foo {
-  border-right: 1px;
-}
-
-html[dir="rtl"] .foo {
-  border-left: 1px;
-}
-    `;
+test('border', t => {
+    const { input, output } = read('border');
     return run(t, input, output, { });
 });
 
