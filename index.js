@@ -8,13 +8,13 @@ function log(...args) {
     });
 }
 
-function cloneRtlItem(item) {
-    let rtlRule = item.clone();
-    rtlRule.raws.before = item.raws.before;
-    rtlRule.raws.after = item.raws.after;
-    rtlRule.raws.between = item.raws.between;
+function cloneItem(item) {
+    let newRule = item.clone();
+    newRule.raws.before = item.raws.before;
+    newRule.raws.after = item.raws.after;
+    newRule.raws.between = item.raws.between;
 
-    return rtlRule;
+    return newRule;
 }
 
 
@@ -117,7 +117,7 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 tree[idx] = {
                     rule:     item,
                     nodes:    [],
-                    rtlRule:  cloneRtlItem(item),
+                    rtlRule:  cloneItem(item),
                     rtlNodes: [],
                     isBiDi:   false
                 };
@@ -125,7 +125,7 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 idx += 1;
             } else if (item.type === 'decl') {
                 tree[currentIdx].nodes.push(item);
-                tree[currentIdx].rtlNodes.push(cloneRtlItem(item));
+                tree[currentIdx].rtlNodes.push(cloneItem(item));
             }
         });
 
