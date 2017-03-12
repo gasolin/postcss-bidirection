@@ -1,4 +1,8 @@
 .foo {
+  text-align: start;
+}
+
+html[dir="ltr"] .foo {
   text-align: left;
 }
 
@@ -7,6 +11,10 @@ html[dir="rtl"] .foo {
 }
 
 .bar {
+  text-align: end;
+}
+
+html[dir="ltr"] .bar {
   text-align: right;
 }
 

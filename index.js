@@ -1,6 +1,10 @@
 var postcss = require('postcss');
 
 const DEBUG = false;
+const SUPPORT_PROPS = ['float', 'clear', 'text-align', 'padding-inline-start', 'padding-inline-end',
+                       'border-inline-start', 'border-inline-end', 'margin-inline-start', 'margin-inline-end',
+                       'offset-inline-start', 'offset-inline-end'
+                      ];
 
 function log(...args) {
     (args || []).forEach(arg => {
@@ -13,11 +17,10 @@ function cloneItem(item) {
     newRule.raws.before = item.raws.before;
     newRule.raws.after = item.raws.after;
     newRule.raws.between = item.raws.between;
-
     return newRule;
 }
 
-
+// process LTR by default, process RTL when reverseFlag is set
 function processProps(decl, reverseFlag) {
     let isDirty = false;
     let start = !reverseFlag ? 'left' : 'right';
@@ -77,6 +80,12 @@ function processProps(decl, reverseFlag) {
     return { newDecl, isDirty };
 }
 
+function isDirty(decl) {
+    if (SUPPORT_PROPS.indexOf(decl.prop.toLowerCase()) > -1) {
+        return true;
+    }
+}
+
 function updateRtlRule(item) {
     return item.rtlNodes.filter(decl => {
         const { newDecl, isDirty } = processProps(decl, true);
@@ -86,23 +95,37 @@ function updateRtlRule(item) {
     });
 }
 
-function updateRtlItem(item) {
-    for ( let i in item.rtlRule ) {
-        if ( !item.rtlRule.hasOwnProperty(i) ) {
+function updateLtrRule(item) {
+    return item.ltrNodes.filter(decl => {
+        const { newDecl, isDirty } = processProps(decl);
+        if (isDirty) {
+            return newDecl;
+        }
+    });
+}
+
+function updateRtlItem(item, reverseFlag) {
+    let rule = reverseFlag ? item.ltrRule : item.rtlRule;
+    for ( let i in rule ) {
+        if ( !rule.hasOwnProperty(i) ) {
             continue;
         }
 
-        if ( item.rtlRule[i] instanceof Array ) {
-            item.rtlRule[i] = updateRtlRule(item);
+        if ( rule[i] instanceof Array ) {
+            rule[i] = reverseFlag ? updateLtrRule(item) : updateRtlRule(item);
         }
     }
 
     return item;
 }
 
+function updateLtrItem(item) {
+    return updateRtlItem(item, true);
+}
 
 module.exports = postcss.plugin('postcss-bidirection', function (opts) {
     opts = opts || {};
+    const PATTERN = /\s*[,\n]+\s*/;
 
     // Work with options here
 
@@ -117,6 +140,8 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 tree[idx] = {
                     rule:     item,
                     nodes:    [],
+                    ltrRule:  cloneItem(item),
+                    ltrNodes: [],
                     rtlRule:  cloneItem(item),
                     rtlNodes: [],
                     isBiDi:   false
@@ -125,6 +150,7 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 idx += 1;
             } else if (item.type === 'decl') {
                 tree[currentIdx].nodes.push(item);
+                tree[currentIdx].ltrNodes.push(cloneItem(item));
                 tree[currentIdx].rtlNodes.push(cloneItem(item));
             }
         });
@@ -132,33 +158,47 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
         // Transform CSS AST here
         // Unefficient but works
 
-        // LTR
+        // default
         tree.forEach(item => {
-            item.nodes.forEach(decl => {
-                const { newDecl, isDirty } = processProps(decl);
-                if (isDirty) {
-                    decl = newDecl;
-                    item.isBiDi = true;
-                }
+            item.nodes = item.nodes.filter(decl => {
+              if (isDirty(decl)) {
+                  item.isBiDi = true;
+              }
+              return decl;
             });
         });
 
-        // RTL
         tree.forEach((item) => {
             if (item.isBiDi) {
+                // LTR
                 // modified from postcss internal clone method
+                updateLtrItem(item, true);
+
+                root.insertAfter(item.rule, item.ltrRule);
+
+                // overwrite rtlRule.raws.before since its been lazy evaluated
+                item.ltrRule.raws.before = '\n\nhtml[dir="ltr"] ';
+
+                // multiple selectors in a rule
+                let selectors = item.ltrRule.selector.split(PATTERN);
+                if (selectors.length) {
+                    item.ltrRule.selector =
+                      selectors.join(',\nhtml[dir="ltr"] ');
+                }
+
+                // RTL
                 updateRtlItem(item);
 
-                root.insertAfter(item.rule, item.rtlRule);
+                root.insertAfter(item.ltrRule, item.rtlRule);
 
                 // overwrite rtlRule.raws.before since its been lazy evaluated
                 item.rtlRule.raws.before = '\n\nhtml[dir="rtl"] ';
 
                 // multiple selectors in a rule
-                let selectors = item.rtlRule.selector.split(/\s*[,\n]+\s*/);
-                if (selectors.length) {
+                let rtlSelectors = item.rtlRule.selector.split(PATTERN);
+                if (rtlSelectors.length) {
                     item.rtlRule.selector =
-                      selectors.join(',\nhtml[dir="rtl"] ');
+                      rtlSelectors.join(',\nhtml[dir="rtl"] ');
                 }
 
                 log('<', item.rule.raws.before,

@@ -1,6 +1,11 @@
 .theme-dark .div.CodeMirror span.marked-text {
   background: rgba(255,255,0,0.2);
   border: 1px dashed rgba(192,192,0,0.6);
+  margin-inline-start: -1px;
+  margin-inline-end: -1px;
+}
+
+html[dir="ltr"] .theme-dark .div.CodeMirror span.marked-text {
   margin-left: -1px;
   margin-right: -1px;
 }

@@ -1,4 +1,8 @@
 .foo {
+  margin-inline-start: 1px;
+}
+
+html[dir="ltr"] .foo {
   margin-left: 1px;
 }
 
@@ -7,6 +11,10 @@ html[dir="rtl"] .foo {
 }
 
 .bar {
+  margin-inline-end: 1px;
+}
+
+html[dir="ltr"] .bar {
   margin-right: 1px;
 }
 

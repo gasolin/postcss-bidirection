@@ -1,4 +1,8 @@
 .foo {
+  offset-inline-start: 1px;
+}
+
+html[dir="ltr"] .foo {
   left: 1px;
 }
 
@@ -7,6 +11,10 @@ html[dir="rtl"] .foo {
 }
 
 .bar {
+  offset-inline-end: 1px;
+}
+
+html[dir="ltr"] .bar {
   right: 1px;
 }
 

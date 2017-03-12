@@ -1,4 +1,8 @@
 .foo {
+  clear: start;
+}
+
+html[dir="ltr"] .foo {
   clear: left;
 }
 
@@ -7,6 +11,10 @@ html[dir="rtl"] .foo {
 }
 
 .bar {
+  clear: end;
+}
+
+html[dir="ltr"] .bar {
   clear: right;
 }
 

@@ -1,4 +1,8 @@
 .foo {
+  padding-inline-start: 1px;
+}
+
+html[dir="ltr"] .foo {
   padding-left: 1px;
 }
 
@@ -7,6 +11,10 @@ html[dir="rtl"] .foo {
 }
 
 .bar {
+  padding-inline-end: 1px;
+}
+
+html[dir="ltr"] .bar {
   padding-right: 1px;
 }
 
