@@ -7,6 +7,10 @@
 }
 
 .sources-header {
+  padding-inline-start: 10px;
+}
+
+html[dir="ltr"] .sources-header {
   padding-left: 10px;
 }
 

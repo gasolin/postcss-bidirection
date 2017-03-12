@@ -4,6 +4,14 @@
 .refresh svg,
 .worker svg {
   top: 7px;
+  margin-inline-end: 5px;
+}
+
+html[dir="ltr"] .file svg,
+html[dir="ltr"] .domain svg,
+html[dir="ltr"] .folder svg,
+html[dir="ltr"] .refresh svg,
+html[dir="ltr"] .worker svg {
   margin-right: 5px;
 }
 

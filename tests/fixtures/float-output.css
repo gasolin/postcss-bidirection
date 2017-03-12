@@ -1,4 +1,8 @@
 .foo {
+  float: start;
+}
+
+html[dir="ltr"] .foo {
   float: left;
 }
 
@@ -7,6 +11,10 @@ html[dir="rtl"] .foo {
 }
 
 .bar {
+  float: end;
+}
+
+html[dir="ltr"] .bar {
   float: right;
 }
 

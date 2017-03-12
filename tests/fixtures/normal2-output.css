@@ -1,5 +1,9 @@
 .toggle-button-end {
   top: 7px;
+  offset-inline-end: 0;
+}
+
+html[dir="ltr"] .toggle-button-end {
   right: 0;
 }
 
