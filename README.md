@@ -104,7 +104,7 @@ html[dir="rtl"] .foo {
 }
 ```
 
-## Absolute Positioning Example
+### Absolute Positioning Example
 
 Input
 
