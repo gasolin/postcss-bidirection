@@ -82,7 +82,7 @@ html[dir="rtl"] .foo {
 }
 ```
 
-## Border Width Example
+### Border Width Example
 
 Input
 
