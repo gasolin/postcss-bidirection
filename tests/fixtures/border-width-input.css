@@ -1,0 +1,7 @@
+.foo {
+  border-inline-start-width: 1px;
+}
+
+.bar {
+  border-inline-end-width: 1px;
+}

@@ -82,6 +82,28 @@ html[dir="rtl"] .foo {
 }
 ```
 
+## Border Width Example
+
+Input
+
+```css
+.foo {
+  border-inline-start-width: 1px;
+}
+```
+
+Output
+
+```css
+.foo {
+  border-left-width: 1px;
+}
+
+html[dir="rtl"] .foo {
+  border-right-width: 1px;
+}
+```
+
 ## Absolute Positioning Example
 
 Input
@@ -107,25 +129,35 @@ html[dir="rtl"] .foo {
 
 All supported syntax are listed below
 
-|     left/right     |     begin/end        |
-|--------------------|----------------------|
-|             **text alignment**            |
-| text-align: left   | text-align: start    |
-| text-align: right  | text-align: end      |
-| float: left        | float: start         |
-| float: right       | float: end           |
-| clear: left        | clear: start         |
-| clear: right       | clear: end           |
-|       **padding, margin, border**         |
-| padding-left       | padding-inli ne-start |
-| padding-right      | padding-inline-end   |
-| border-left        | border-inline-start  |
-| border-right       | border-inline-end    |
-| margin-left        | margin-inline-start  |
-| margin-right       | margin-inline-end    |
-|         **absolute positioning**          |
-| left               | offset-inline-start  |
-| right              | offset-inline-end    |
+|     left/right             |     begin/end                     |
+|----------------------------|-----------------------------------|
+|                   **text alignment**                           |
+| text-align: left           | text-align: start                 |
+| text-align: right          | text-align: end                   |
+| float: left                | float: start                      |
+| float: right               | float: end                        |
+| clear: left                | clear: start                      |
+| clear: right               | clear: end                        |
+|               **padding, margin, border**                      |
+| padding-left               | padding-inline-start              |
+| padding-right              | padding-inline-end                |
+| border-left                | border-inline-start               |
+| border-right               | border-inline-end                 |
+| border-left-color          | border-inline-end-color           |
+| border-right-color         | border-inline-start-color         |
+| border-left-style          | border-inline-start-style         |
+| border-right-style         | border-inline-end-style           |
+| border-left-width          | border-inline-start-width         |
+| border-right-width         | border-inline-end-width           |
+| border-top-left-radius     | border-top-inline-start-radius    |
+| border-top-right-radius    | border-top-inline-end-radius      |
+| border-bottom-left-radius  | border-bottom-inline-start-radius |
+| border-bottom-right-radius | border-bottom-inline-end-radius   |
+| margin-left                | margin-inline-start               |
+| margin-right               | margin-inline-end                 |
+|                 **absolute positioning**                       |
+| left                       | offset-inline-start               |
+| right                      | offset-inline-end                 |
 
 
 ## Debugging

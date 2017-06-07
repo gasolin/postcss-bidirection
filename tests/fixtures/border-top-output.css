@@ -1,0 +1,15 @@
+.foo {
+  border-top-left-radius: 1px;
+}
+
+html[dir="rtl"] .foo {
+  border-top-right-radius: 1px;
+}
+
+.bar {
+  border-top-right-radius: 1px;
+}
+
+html[dir="rtl"] .bar {
+  border-top-left-radius: 1px;
+}

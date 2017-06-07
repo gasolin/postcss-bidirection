@@ -55,6 +55,31 @@ test('border-inline-(start/end)', t => {
     return run(t, input, output, { });
 });
 
+test('border-inline-(start/end)-color', t => {
+    const { input, output } = read('border-color');
+    return run(t, input, output, { });
+});
+
+test('border-inline-(start/end)-style', t => {
+    const { input, output } = read('border-style');
+    return run(t, input, output, { });
+});
+
+test('border-inline-(start/end)-width', t => {
+    const { input, output } = read('border-width');
+    return run(t, input, output, { });
+});
+
+test('border-top-inline-(start/end)-radius', t => {
+    const { input, output } = read('border-top');
+    return run(t, input, output, { });
+});
+
+test('border-bottom-inline-(start/end)-radius', t => {
+    const { input, output } = read('border-bottom');
+    return run(t, input, output, { });
+});
+
 test('margin-inline-(start/end)', t => {
     const { input, output } = read('margin');
     return run(t, input, output, { });
