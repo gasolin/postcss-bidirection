@@ -1,0 +1,15 @@
+.foo {
+  border-left-color: 1px;
+}
+
+html[dir="rtl"] .foo {
+  border-right-color: 1px;
+}
+
+.bar {
+  border-right-color: 1px;
+}
+
+html[dir="rtl"] .bar {
+  border-left-color: 1px;
+}

@@ -51,6 +51,46 @@ function processProps(decl, reverseFlag) {
         decl.prop = 'border-' + end;
         isDirty = true;
         break;
+    case 'border-inline-start-color':
+        decl.prop = 'border-' + start + '-color';
+        isDirty = true;
+        break;
+    case 'border-inline-end-color':
+        decl.prop = 'border-' + end + '-color';
+        isDirty = true;
+        break;
+    case 'border-inline-start-width':
+        decl.prop = 'border-' + start + '-width';
+        isDirty = true;
+        break;
+    case 'border-inline-end-width':
+        decl.prop = 'border-' + end + '-width';
+        isDirty = true;
+        break;
+    case 'border-inline-start-style':
+        decl.prop = 'border-' + start + '-style';
+        isDirty = true;
+        break;
+    case 'border-inline-end-style':
+        decl.prop = 'border-' + end + '-style';
+        isDirty = true;
+        break;
+    case 'border-top-inline-start-radius':
+        decl.prop = 'border-top-' + start + '-radius';
+        isDirty = true;
+        break;
+    case 'border-top-inline-end-radius':
+        decl.prop = 'border-top-' + end + '-radius';
+        isDirty = true;
+        break;
+    case 'border-bottom-inline-start-radius':
+        decl.prop = 'border-bottom-' + start + '-radius';
+        isDirty = true;
+        break;
+    case 'border-bottom-inline-end-radius':
+        decl.prop = 'border-bottom-' + end + '-radius';
+        isDirty = true;
+        break;
     case 'margin-inline-start':
         decl.prop = 'margin-' + start;
         isDirty = true;

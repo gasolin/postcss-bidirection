@@ -1,0 +1,7 @@
+.foo {
+  border-top-inline-start-radius: 1px;
+}
+
+.bar {
+  border-top-inline-end-radius: 1px;
+}
