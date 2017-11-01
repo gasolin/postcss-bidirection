@@ -238,7 +238,7 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 let rtlSelectors = item.rtlRule.selector.split(PATTERN);
                 if (rtlSelectors.length) {
                     item.rtlRule.selector =
-                      rtlSelectors.join(',\nhtml[dir="rtl"] ');
+                      rtlSelectors.join(',\n[dir="rtl"] ');
                 }
 
                 log('<', item.rule.raws.before,
