@@ -217,13 +217,13 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 root.insertAfter(item.rule, item.ltrRule);
 
                 // overwrite rtlRule.raws.before since its been lazy evaluated
-                item.ltrRule.raws.before = '\n\nhtml[dir="ltr"] ';
+                item.ltrRule.raws.before = '\n\n[dir="ltr"] ';
 
                 // multiple selectors in a rule
                 let selectors = item.ltrRule.selector.split(PATTERN);
                 if (selectors.length) {
                     item.ltrRule.selector =
-                      selectors.join(',\nhtml[dir="ltr"] ');
+                      selectors.join(',\n[dir="ltr"] ');
                 }
 
                 // RTL
