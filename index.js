@@ -233,7 +233,7 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 root.insertAfter(item.ltrRule, item.rtlRule);
 
                 // prefix each comma-separated selector
-                item.ltrRule.selector = item.ltrRule.selector
+                item.rtlRule.selector = item.rtlRule.selector
                     .split(PATTERN)
                     .map(function(selector){
                         return ("[dir=\"rtl\"] " + selector);
