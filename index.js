@@ -198,6 +198,8 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
         // Transform CSS AST here
         // Unefficient but works
 
+
+
         // default
         tree.forEach(item => {
             item.nodes = item.nodes.filter(decl => {
@@ -210,39 +212,37 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
 
         tree.forEach((item) => {
             if (item.isBiDi) {
+
                 // LTR
                 // modified from postcss internal clone method
                 updateLtrItem(item, true);
 
                 root.insertAfter(item.rule, item.ltrRule);
 
-                // overwrite rtlRule.raws.before since its been lazy evaluated
-                item.ltrRule.raws.before = '\n\n[dir="ltr"] ';
-
-                // multiple selectors in a rule
-                let selectors = item.ltrRule.selector.split(PATTERN);
-                if (selectors.length) {
-                    item.ltrRule.selector =
-                      selectors.join(',\n[dir="ltr"] ');
-                }
+                // prefix each comma-separated selector
+                item.ltrRule.selector = item.ltrRule.selector
+                    .split(PATTERN)
+                    .map(function(selector){
+                        return ("[dir=\"ltr\"] " + selector);
+                    })
+                    .join(',\n');
 
                 // RTL
                 updateRtlItem(item);
 
                 root.insertAfter(item.ltrRule, item.rtlRule);
 
-                // overwrite rtlRule.raws.before since its been lazy evaluated
-                item.rtlRule.raws.before = '\n\n[dir="rtl"] ';
+                // prefix each comma-separated selector
+                item.ltrRule.selector = item.ltrRule.selector
+                    .split(PATTERN)
+                    .map(function(selector){
+                        return ("[dir=\"rtl\"] " + selector);
+                    })
+                    .join(',\n');
 
-                // multiple selectors in a rule
-                let rtlSelectors = item.rtlRule.selector.split(PATTERN);
-                if (rtlSelectors.length) {
-                    item.rtlRule.selector =
-                      rtlSelectors.join(',\n[dir="rtl"] ');
-                }
 
-                log('<', item.rule.raws.before,
-                    '>', item.rtlRule.raws.before);
+                log('<', item.rule.raw.before,
+                    '>', item.rtlRule.raw.before);
             }
         });
     };
