@@ -217,7 +217,7 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 // modified from postcss internal clone method
                 updateLtrItem(item, true);
 
-                root.insertAfter(item.rule, item.ltrRule);
+                item.rule.parent.insertAfter(item.rule, item.ltrRule);
 
                 // prefix each comma-separated selector
                 item.ltrRule.selector = item.ltrRule.selector
@@ -230,7 +230,7 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 // RTL
                 updateRtlItem(item);
 
-                root.insertAfter(item.ltrRule, item.rtlRule);
+                item.ltrRule.parent.insertAfter(item.ltrRule, item.rtlRule);
 
                 // prefix each comma-separated selector
                 item.rtlRule.selector = item.rtlRule.selector
