@@ -216,14 +216,17 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 // LTR
                 // modified from postcss internal clone method
                 updateLtrItem(item, true);
+            item.ltrRule.before="XXXXXX\n";
 
                 item.rule.parent.insertAfter(item.rule, item.ltrRule);
+
+                item.ltrRule.before = "\n\n";
 
                 // prefix each comma-separated selector
                 item.ltrRule.selector = item.ltrRule.selector
                     .split(PATTERN)
-                    .map(function(selector){
-                        return ("[dir=\"ltr\"] " + selector);
+                    .map(function(selector, i){
+                        return ("html[dir=\"ltr\"] " + selector);
                     })
                     .join(',\n');
 
@@ -232,11 +235,13 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
 
                 item.ltrRule.parent.insertAfter(item.ltrRule, item.rtlRule);
 
+                item.rtlRule.before = "\n\n";
+
                 // prefix each comma-separated selector
                 item.rtlRule.selector = item.rtlRule.selector
                     .split(PATTERN)
-                    .map(function(selector){
-                        return ("[dir=\"rtl\"] " + selector);
+                    .map(function(selector, i){
+                        return ("html[dir=\"rtl\"] " + selector);
                     })
                     .join(',\n');
 
