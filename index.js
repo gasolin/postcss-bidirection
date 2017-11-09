@@ -108,7 +108,7 @@ function processProps(decl, reverseFlag) {
     return { newDecl, isDirty };
 }
 
-function isDirty(decl) {
+function isSupportedProps(decl) {
     if (SUPPORT_PROPS.indexOf(decl.prop.toLowerCase()) > -1) {
         return true;
     }
@@ -189,7 +189,7 @@ function postcssBiDirection(opts) {
         // default
         tree.forEach(item => {
             item.nodes = item.nodes.filter(decl => {
-              if (isDirty(decl)) {
+              if (isSupportedProps(decl)) {
                   item.isBiDi = true;
               }
               return decl;
