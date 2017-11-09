@@ -1,4 +1,8 @@
 .foo {
+  border-top-inline-start-radius: 1px;
+}
+
+html[dir="ltr"] .foo {
   border-top-left-radius: 1px;
 }
 
@@ -7,6 +11,10 @@ html[dir="rtl"] .foo {
 }
 
 .bar {
+  border-top-inline-end-radius: 1px;
+}
+
+html[dir="ltr"] .bar {
   border-top-right-radius: 1px;
 }
 

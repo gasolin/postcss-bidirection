@@ -2,7 +2,13 @@ var postcss = require('postcss');
 
 const DEBUG = false;
 const SUPPORT_PROPS = ['float', 'clear', 'text-align', 'padding-inline-start', 'padding-inline-end',
-                       'border-inline-start', 'border-inline-end', 'margin-inline-start', 'margin-inline-end',
+                       'border-inline-start', 'border-inline-end', 'border-inline-start-color', 'border-inline-end-color',
+                       'border-inline-start-style', 'border-inline-end-style',
+                       'border-inline-start-width', 'border-inline-end-width',
+                       'border-inline-start-top', 'border-inline-end-top',
+                       'border-top-inline-start-radius', 'border-top-inline-end-radius',
+                       'border-bottom-inline-start-radius', 'border-bottom-inline-end-radius',
+                       'margin-inline-start', 'margin-inline-end',
                        'offset-inline-start', 'offset-inline-end'
                       ];
 
@@ -163,7 +169,7 @@ function updateLtrItem(item) {
     return updateRtlItem(item, true);
 }
 
-module.exports = postcss.plugin('postcss-bidirection', function (opts) {
+function postcssBiDirection(opts) {
     opts = opts || {};
     const PATTERN = /\s*[,\n]+\s*/;
 
@@ -246,4 +252,6 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
             }
         });
     };
-});
+}
+
+module.exports = postcss.plugin('postcss-bidirection', postcssBiDirection);
