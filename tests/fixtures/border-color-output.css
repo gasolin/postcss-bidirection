@@ -1,4 +1,8 @@
 .foo {
+  border-inline-start-color: 1px;
+}
+
+html[dir="ltr"] .foo {
   border-left-color: 1px;
 }
 
@@ -7,6 +11,10 @@ html[dir="rtl"] .foo {
 }
 
 .bar {
+  border-inline-end-color: 1px;
+}
+
+html[dir="ltr"] .bar {
   border-right-color: 1px;
 }
 
