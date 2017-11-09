@@ -1,0 +1,61 @@
+
+[32m  ✔[39m text-align[90m[2m (103ms)[22m[39m
+[32m  ✔[39m float
+[32m  ✔[39m clear
+[32m  ✔[39m padding-inline-(start/end)
+[32m  ✔[39m border-inline-(start/end)
+[31m  ✖[39m border-inline-(start/end)-color [31m  
+  t.same(result.css, output)
+                |    |      
+                |    ".foo {\n  border-left-color: 1px;\n}\n\nhtml[dir=\"rtl\"] .foo {\n  border-right-color: 1px;\n}\n\n.bar {\n  border-right-color: 1px;\n}\n\nhtml[dir=\"rtl\"] .bar {\n  border-left-color: 1px;\n}\n"
+                ".foo {\n  border-inline-start-color: 1px;\n}\n\n.bar {\n  border-inline-end-color: 1px;\n}\n"
+  [39m
+[31m  ✖[39m border-inline-(start/end)-style [31m  
+  t.same(result.css, output)
+                |    |      
+                |    ".foo {\n  border-left-style: 1px;\n}\n\nhtml[dir=\"rtl\"] .foo {\n  border-right-style: 1px;\n}\n\n.bar {\n  border-right-style: 1px;\n}\n\nhtml[dir=\"rtl\"] .bar {\n  border-left-style: 1px;\n}\n"
+                ".foo {\n  border-inline-start-style: 1px;\n}\n\n.bar {\n  border-inline-end-style: 1px;\n}\n"
+  [39m
+[31m  ✖[39m border-inline-(start/end)-width [31m  
+  t.same(result.css, output)
+                |    |      
+                |    ".foo {\n  border-left-width: 1px;\n}\n\nhtml[dir=\"rtl\"] .foo {\n  border-right-width: 1px;\n}\n\n.bar {\n  border-right-width: 1px;\n}\n\nhtml[dir=\"rtl\"] .bar {\n  border-left-width: 1px;\n}\n"
+                ".foo {\n  border-inline-start-width: 1px;\n}\n\n.bar {\n  border-inline-end-width: 1px;\n}\n"
+  [39m
+[31m  ✖[39m border-top-inline-(start/end)-radius [31m  
+  t.same(result.css, output)
+                |    |      
+                |    ".foo {\n  border-top-left-radius: 1px;\n}\n\nhtml[dir=\"rtl\"] .foo {\n  border-top-right-radius: 1px;\n}\n\n.bar {\n  border-top-right-radius: 1px;\n}\n\nhtml[dir=\"rtl\"] .bar {\n  border-top-left-radius: 1px;\n}\n"
+                ".foo {\n  border-top-inline-start-radius: 1px;\n}\n\n.bar {\n  border-top-inline-end-radius: 1px;\n}\n"
+  [39m
+[31m  ✖[39m border-bottom-inline-(start/end)-radius [31m  
+  t.same(result.css, output)
+                |    |      
+                |    ".foo {\n  border-bottom-left-radius: 1px;\n}\n\nhtml[dir=\"rtl\"] .foo {\n  border-bottom-right-radius: 1px;\n}\n\n.bar {\n  border-bottom-right-radius: 1px;\n}\n\nhtml[dir=\"rtl\"] .bar {\n  border-bottom-left-radius: 1px;\n}\n"
+                ".foo {\n  border-bottom-inline-start-radius: 1px;\n}\n\n.bar {\n  border-bottom-inline-end-radius: 1px;\n}\n"
+  [39m
+[32m  ✔[39m margin-inline-(start/end)
+[32m  ✔[39m offset-inline-(start/end)
+[32m  ✔[39m do not do anything on unaffected rules
+[32m  ✔[39m codemirror
+[32m  ✔[39m normal rules with bidi rules should display correctly
+[32m  ✔[39m should only render affected styles into rtl rules
+[32m  ✔[39m should render rtl before each multi-selector rule
+
+  [31m5 tests failed[39m
+
+  [31m1. border-inline-(start/end)-color[39m
+  [31mAssertionError: '.foo {\n  border-inline-start-color: 1px;\n}\n\n.bar {\n  border-inline-end-color: 1px;\n}\n' === '.foo {\n  border-left-color: 1px;\n}\n\nhtml[dir="rtl"] .foo {\n  border-right-color: 1px;\n}\n\n.bar {\n  border-right-color: [39m
+
+  [31m2. border-inline-(start/end)-style[39m
+  [31mAssertionError: '.foo {\n  border-inline-start-style: 1px;\n}\n\n.bar {\n  border-inline-end-style: 1px;\n}\n' === '.foo {\n  border-left-style: 1px;\n}\n\nhtml[dir="rtl"] .foo {\n  border-right-style: 1px;\n}\n\n.bar {\n  border-right-style: [39m
+
+  [31m3. border-inline-(start/end)-width[39m
+  [31mAssertionError: '.foo {\n  border-inline-start-width: 1px;\n}\n\n.bar {\n  border-inline-end-width: 1px;\n}\n' === '.foo {\n  border-left-width: 1px;\n}\n\nhtml[dir="rtl"] .foo {\n  border-right-width: 1px;\n}\n\n.bar {\n  border-right-width: [39m
+
+  [31m4. border-top-inline-(start/end)-radius[39m
+  [31mAssertionError: '.foo {\n  border-top-inline-start-radius: 1px;\n}\n\n.bar {\n  border-top-inline-end-radius: 1px;\n}\n' === '.foo {\n  border-top-left-radius: 1px;\n}\n\nhtml[dir="rtl"] .foo {\n  border-top-right-radius: 1px;\n}\n\n.bar {\n  border-top[39m
+
+  [31m5. border-bottom-inline-(start/end)-radius[39m
+  [31mAssertionError: '.foo {\n  border-bottom-inline-start-radius: 1px;\n}\n\n.bar {\n  border-bottom-inline-end-radius: 1px;\n}\n' === '.foo {\n  border-bottom-left-radius: 1px;\n}\n\nhtml[dir="rtl"] .foo {\n  border-bottom-right-radius: 1px;\n}\n\n.bar {\n  bord[39m
+

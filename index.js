@@ -216,7 +216,6 @@ module.exports = postcss.plugin('postcss-bidirection', function (opts) {
                 // LTR
                 // modified from postcss internal clone method
                 updateLtrItem(item, true);
-            item.ltrRule.before="XXXXXX\n";
 
                 item.rule.parent.insertAfter(item.rule, item.ltrRule);
 
