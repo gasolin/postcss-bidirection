@@ -6,7 +6,7 @@ import fs from 'fs';
 
 function read(name) {
     function _read(ele) {
-        return fs.readFileSync(`./fixtures/${ele}.css`, {
+        return fs.readFileSync(`./tests/fixtures/${ele}.css`, {
             encoding: 'utf8'
         });
     }
@@ -20,8 +20,8 @@ function read(name) {
 function run(t, input, output, opts = { }) {
     return postcss([ plugin(opts) ]).process(input)
         .then(result => {
-            t.same(result.css, output);
-            t.same(result.warnings().length, 0);
+            t.deepEqual(result.css, output);
+            t.is(result.warnings().length, 0);
         })
         .catch(function (error) {
             t.fail();
