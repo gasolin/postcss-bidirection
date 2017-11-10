@@ -202,12 +202,13 @@ function postcssBiDirection(opts) {
             if (item.isBiDi) {
 
                 // LTR
+                
                 // modified from postcss internal clone method
                 updateLtrItem(item, true);
 
-                item.rule.parent.insertAfter(item.rule, item.ltrRule);
+                item.ltrRule.raws.before = "\n\n" + item.ltrRule.raws.before.replace(/^\n\n/,"");
 
-                item.ltrRule.before = "\n\n";
+                item.rule.parent.insertAfter(item.rule, item.ltrRule);
 
                 // prefix each comma-separated selector
                 item.ltrRule.selector = item.ltrRule.selector
@@ -220,9 +221,9 @@ function postcssBiDirection(opts) {
                 // RTL
                 updateRtlItem(item);
 
-                item.ltrRule.parent.insertAfter(item.ltrRule, item.rtlRule);
+                item.rtlRule.raws.before = "\n\n" + item.rtlRule.raws.before.replace(/^\n\n/,"");
 
-                item.rtlRule.before = "\n\n";
+                item.ltrRule.parent.insertAfter(item.ltrRule, item.rtlRule);
 
                 // prefix each comma-separated selector
                 item.rtlRule.selector = item.rtlRule.selector
