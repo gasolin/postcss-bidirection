@@ -121,3 +121,8 @@ test('should render rtl before each multi-selector rule', t => {
     const { input, output } = read('multi-selectors');
     return run(t, input, output, { });
 });
+
+test('nested rules', t => {
+    const { input, output } = read('nested');
+    return run(t, input, output, { });
+});

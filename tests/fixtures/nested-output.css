@@ -1,0 +1,29 @@
+@media screen and (min-width: 480px) {
+
+    .foo{
+        offset-inline-start: 1px;    
+    }
+
+    html[dir="ltr"] .foo{
+        left: 1px;    
+    }
+
+    html[dir="rtl"] .foo{
+        right: 1px;    
+    }
+
+    @media screen and (min-width: 768px) {
+
+        .bar{
+            offset-inline-end: 1px;    
+        }
+
+        html[dir="ltr"] .bar{
+            right: 1px;    
+        }
+
+        html[dir="rtl"] .bar{
+            left: 1px;    
+        }
+    }
+}
