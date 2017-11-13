@@ -186,8 +186,6 @@ function postcssBiDirection(opts) {
         // Transform CSS AST here
         // Unefficient but works
 
-
-
         // default
         tree.forEach(item => {
             item.nodes = item.nodes.filter(decl => {
@@ -200,20 +198,17 @@ function postcssBiDirection(opts) {
 
         tree.forEach((item) => {
             if (item.isBiDi) {
-
-                // LTR
-                
+                // LTR        
                 // modified from postcss internal clone method
                 updateLtrItem(item, true);
 
                 item.ltrRule.raws.before = "\n\n" + item.ltrRule.raws.before.replace(/^\n\n/,"");
-
                 item.rule.parent.insertAfter(item.rule, item.ltrRule);
 
                 // prefix each comma-separated selector
                 item.ltrRule.selector = item.ltrRule.selector
                     .split(PATTERN)
-                    .map(function(selector, i){
+                    .map(function(selector, i) {
                         return ("html[dir=\"ltr\"] " + selector);
                     })
                     .join(',\n');
@@ -222,13 +217,12 @@ function postcssBiDirection(opts) {
                 updateRtlItem(item);
 
                 item.rtlRule.raws.before = "\n\n" + item.rtlRule.raws.before.replace(/^\n\n/,"");
-
                 item.ltrRule.parent.insertAfter(item.ltrRule, item.rtlRule);
 
                 // prefix each comma-separated selector
                 item.rtlRule.selector = item.rtlRule.selector
                     .split(PATTERN)
-                    .map(function(selector, i){
+                    .map(function(selector, i) {
                         return ("html[dir=\"rtl\"] " + selector);
                     })
                     .join(',\n');
