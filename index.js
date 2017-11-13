@@ -198,7 +198,7 @@ function postcssBiDirection(opts) {
 
         tree.forEach((item) => {
             if (item.isBiDi) {
-                // LTR        
+                // LTR
                 // modified from postcss internal clone method
                 updateLtrItem(item, true);
 
