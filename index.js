@@ -202,35 +202,34 @@ function postcssBiDirection(opts) {
                 // modified from postcss internal clone method
                 updateLtrItem(item, true);
 
-                root.insertAfter(item.rule, item.ltrRule);
+                item.ltrRule.raws.before = "\n\n" + item.ltrRule.raws.before.replace(/^\n\n/,"");
+                item.rule.parent.insertAfter(item.rule, item.ltrRule);
 
-                // overwrite rtlRule.raws.before since its been lazy evaluated
-                item.ltrRule.raws.before = '\n\nhtml[dir="ltr"] ';
-
-                // multiple selectors in a rule
-                let selectors = item.ltrRule.selector.split(PATTERN);
-                if (selectors.length) {
-                    item.ltrRule.selector =
-                      selectors.join(',\nhtml[dir="ltr"] ');
-                }
+                // prefix each comma-separated selector
+                item.ltrRule.selector = item.ltrRule.selector
+                    .split(PATTERN)
+                    .map(function(selector, i) {
+                        return ("html[dir=\"ltr\"] " + selector);
+                    })
+                    .join(',\n');
 
                 // RTL
                 updateRtlItem(item);
 
-                root.insertAfter(item.ltrRule, item.rtlRule);
+                item.rtlRule.raws.before = "\n\n" + item.rtlRule.raws.before.replace(/^\n\n/,"");
+                item.ltrRule.parent.insertAfter(item.ltrRule, item.rtlRule);
 
-                // overwrite rtlRule.raws.before since its been lazy evaluated
-                item.rtlRule.raws.before = '\n\nhtml[dir="rtl"] ';
+                // prefix each comma-separated selector
+                item.rtlRule.selector = item.rtlRule.selector
+                    .split(PATTERN)
+                    .map(function(selector, i) {
+                        return ("html[dir=\"rtl\"] " + selector);
+                    })
+                    .join(',\n');
 
-                // multiple selectors in a rule
-                let rtlSelectors = item.rtlRule.selector.split(PATTERN);
-                if (rtlSelectors.length) {
-                    item.rtlRule.selector =
-                      rtlSelectors.join(',\nhtml[dir="rtl"] ');
-                }
 
-                log('<', item.rule.raws.before,
-                    '>', item.rtlRule.raws.before);
+                log('<', item.rule.raw.before,
+                    '>', item.rtlRule.raw.before);
             }
         });
     };
