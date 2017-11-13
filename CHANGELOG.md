@@ -1,3 +1,13 @@
+2.5 2017/11/13
+
+* keep the default styles and generate both LTR/RTL styles
+* support media-query, thanks @rolfen
+* Support more border syntaxes, thanks Justin Daining
+
+2.4 2017/2/17
+
+* fix a bug when isDirty is flagged on while no changes is needed , thanks @nirhart
+
 2.3 2017/2/15
 
 * refactor
