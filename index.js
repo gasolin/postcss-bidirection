@@ -151,11 +151,20 @@ function updateLtrItem(item) {
     return updateRtlItem(item, true);
 }
 
+// Return directional CSS selector (eg: "html[dir='ltr'] .footer") based on original selector and direction (rtl/ltr)
+// This can be overriden in options
+function defaultBuildSelector(selector, direction) {
+    return('html[dir="' + direction + '"] ' + selector);
+}
+
 function postcssBiDirection(opts) {
     opts = opts || {};
     const PATTERN = /\s*[,\n]+\s*/;
 
     // Work with options here
+    if(!opts.buildSelector) {
+        opts.buildSelector = defaultBuildSelector;
+    }
 
     return function (root) {
         let tree = [];
@@ -208,8 +217,8 @@ function postcssBiDirection(opts) {
                 // prefix each comma-separated selector
                 item.ltrRule.selector = item.ltrRule.selector
                     .split(PATTERN)
-                    .map(function(selector, i) {
-                        return ("html[dir=\"ltr\"] " + selector);
+                    .map(function(selector, i){
+                        return opts.buildSelector(selector, 'ltr');
                     })
                     .join(',\n');
 
@@ -222,8 +231,8 @@ function postcssBiDirection(opts) {
                 // prefix each comma-separated selector
                 item.rtlRule.selector = item.rtlRule.selector
                     .split(PATTERN)
-                    .map(function(selector, i) {
-                        return ("html[dir=\"rtl\"] " + selector);
+                    .map(function(selector, i){
+                        return opts.buildSelector(selector, 'rtl');
                     })
                     .join(',\n');
 

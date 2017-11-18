@@ -126,3 +126,16 @@ test('nested rules', t => {
     const { input, output } = read('nested');
     return run(t, input, output, { });
 });
+
+test('custom selector', t => {
+    const { input, output } = read('custom-selector');
+    return run(t, input, output, {
+        buildSelector: function(selector, direction) {
+            if(direction == "ltr") {
+                return ".bar.direction-ltr " + selector;
+            } else {
+                return '[dir="' + direction + '"] ' + selector;
+            }
+        }
+    });
+});

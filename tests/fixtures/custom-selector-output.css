@@ -1,0 +1,11 @@
+.foo{
+    offset-inline-start: 1px;    
+}
+
+.bar.direction-ltr .foo{
+    left: 1px;    
+}
+
+[dir="rtl"] .foo{
+    right: 1px;    
+}

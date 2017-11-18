@@ -33,6 +33,30 @@ To check the layout change, in your HTML file, add attribute in your html tags
 
 Or, in your js file, set `document.dir = 'rtl'` or `document.dir = 'ltr'`.
 
+## Options
+
+postcss-bidirection accepts an options object.
+
+```
+const plugin = require('postcss-bidirection');
+const opts = {
+    ...
+};
+postcss([ plugin(opts) ]).process(input) ...
+```
+
+### Custom Selectors
+
+By default, postcss-bidirection will prefix generated selectors with `html[dir="rtl"]` or `html[dir="ltr"]`.
+The `buildSelector` option allows you to customize this behavior. For example, to drop `html` from generated selectors, pass a custom `buildSelector` function to the plugin:
+
+```
+const opts = {
+  buildSelector = function(selector, direction) {
+    return '[dir=" + direction + '"] ' + selector;
+  }
+};
+```
 
 ## Examples
 
