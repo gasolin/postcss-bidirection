@@ -33,31 +33,6 @@ To check the layout change, in your HTML file, add attribute in your html tags
 
 Or, in your js file, set `document.dir = 'rtl'` or `document.dir = 'ltr'`.
 
-## Options
-
-postcss-bidirection accepts an options object.
-
-```
-const plugin = require('postcss-bidirection');
-const opts = {
-    ...
-};
-postcss([ plugin(opts) ]).process(input) ...
-```
-
-### Custom Selectors
-
-By default, postcss-bidirection will prefix generated selectors with `html[dir="rtl"]` or `html[dir="ltr"]`.
-The `buildSelector` option allows you to customize this behavior. For example, to drop `html` from generated selectors, pass a custom `buildSelector` function to the plugin:
-
-```
-const opts = {
-  buildSelector = function(selector, direction) {
-    return '[dir=" + direction + '"] ' + selector;
-  }
-};
-```
-
 ## Examples
 
 PostCSS Bidirection support syntax based on https://wiki.mozilla.org/Gaia/CSS_Guidelines
@@ -182,6 +157,61 @@ All supported syntax are listed below
 |                 **absolute positioning**                       |
 | left                       | offset-inline-start               |
 | right                      | offset-inline-end                 |
+
+## Options
+
+postcss-bidirection accepts an options object.
+
+```
+const plugin = require('postcss-bidirection');
+const opts = {
+    ...
+};
+postcss([ plugin(opts) ]).process(input) ...
+```
+
+### Custom Selectors
+
+By default, postcss-bidirection prefixes generated CSS selectors with `html[dir="rtl"]` or `html[dir="ltr"]`. The `buildSelector` option allows you to override this behavior. 
+
+This callback gets called once for every selector of every rule that contains translated properties. If the rule has multiple selectors separated by commas, then it will be called multiple times for that rule.
+
+It takes two arguments:
+  - the original CSS selector of the rule that we are translating
+  - The direction to which it is being translated. Can be `rtl` or `ltr`.
+  
+It should return a CSS selector string, which will be attached to the translated CSS rule.
+   
+For example, to drop `html` from generated selectors, pass a custom `buildSelector` function to the plugin.
+
+```
+const opts = {
+  buildSelector = function(selector, direction) {
+    return '[dir=" + direction + '"] ' + selector;
+  }
+};
+
+postcss([ require('postcss-bidirection')(opts) ])
+```
+
+Input
+
+```css
+.foo {
+  text-align: start;
+}
+```
+
+Now we have `[dir="rtl"]` instead of `html[dir="rtl"]` in the output: 
+
+```css
+.foo {
+  text-align: left;
+}
+
+[dir="rtl"] .foo {
+  text-align: right;
+}
 
 
 ## Debugging
