@@ -212,7 +212,7 @@ Now we have `[dir="rtl"]` instead of `html[dir="rtl"]` in the output:
 [dir="rtl"] .foo {
   text-align: right;
 }
-
+```
 
 ## Debugging
 
