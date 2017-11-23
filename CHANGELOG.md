@@ -1,3 +1,7 @@
+2.6 2017/11/23
+
+* support custom output via pass the `buildSelector` option, thanks @rolfen
+
 2.5 2017/11/13
 
 * keep the default styles and generate both LTR/RTL styles
