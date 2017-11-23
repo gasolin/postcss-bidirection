@@ -191,7 +191,8 @@ const opts = {
   }
 };
 
-postcss([ require('postcss-bidirection')(opts) ])
+let bidirection = require('postcss-bidirection');
+postcss([ bidirection(opts) ]);
 ```
 
 Input
