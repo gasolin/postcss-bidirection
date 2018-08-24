@@ -135,9 +135,9 @@ test('nested rules', t => {
 test('custom selector', t => {
     const { input, output } = read('custom-selector');
     return run(t, input, output, {
-        buildSelector: function(selector, direction) {
-            if(direction == "ltr") {
-                return ".bar.direction-ltr " + selector;
+        buildSelector: function (selector, direction) {
+            if(direction === 'ltr') {
+                return '.bar.direction-ltr ' + selector;
             } else {
                 return '[dir="' + direction + '"] ' + selector;
             }
