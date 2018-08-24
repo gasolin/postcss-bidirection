@@ -90,6 +90,11 @@ test('offset-inline-(start/end)', t => {
     return run(t, input, output, { });
 });
 
+test('inset-inline-(start/end)', t => {
+    const { input, output } = read('inset-inline');
+    return run(t, input, output, { });
+});
+
 test('do not do anything on unaffected rules', t => {
     var input = `.foo {
   margin-top: 1px

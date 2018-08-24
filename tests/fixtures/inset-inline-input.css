@@ -1,0 +1,7 @@
+.foo {
+  inset-inline-start: 1px;
+}
+
+.bar {
+  inset-inline-end: 1px;
+}
