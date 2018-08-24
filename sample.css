@@ -53,3 +53,11 @@
 .foo {
   offset-inline-end: 1px;
 }
+
+.foo {
+  inset-inline-start: 1px;
+}
+
+.foo {
+  inset-inline-end: 1px;
+}
