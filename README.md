@@ -109,7 +109,7 @@ Input
 
 ```css
 .foo {
-  offset-inline-start: 1px;
+  inset-inline-start: 1px;
 }
 ```
 
@@ -155,6 +155,8 @@ All supported syntax are listed below
 | margin-left                | margin-inline-start               |
 | margin-right               | margin-inline-end                 |
 |                 **absolute positioning**                       |
+| left                       | inset-inline-start                |
+| right                      | inset-inline-end                  |
 | left                       | offset-inline-start               |
 | right                      | offset-inline-end                 |
 
