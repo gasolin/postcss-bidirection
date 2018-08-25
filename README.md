@@ -157,8 +157,8 @@ All supported syntax are listed below
 |                 **absolute positioning**                       |
 | left                       | inset-inline-start                |
 | right                      | inset-inline-end                  |
-| left                       | offset-inline-start               |
-| right                      | offset-inline-end                 |
+| left                       | offset-inline-start (obsolete)    |
+| right                      | offset-inline-end (obsolete)      |
 
 ## Options
 
