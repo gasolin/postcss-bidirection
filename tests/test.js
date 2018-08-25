@@ -90,6 +90,11 @@ test('offset-inline-(start/end)', t => {
     return run(t, input, output, { });
 });
 
+test('inset-inline-(start/end)', t => {
+    const { input, output } = read('inset-inline');
+    return run(t, input, output, { });
+});
+
 test('do not do anything on unaffected rules', t => {
     var input = `.foo {
   margin-top: 1px
@@ -130,9 +135,9 @@ test('nested rules', t => {
 test('custom selector', t => {
     const { input, output } = read('custom-selector');
     return run(t, input, output, {
-        buildSelector: function(selector, direction) {
-            if(direction == "ltr") {
-                return ".bar.direction-ltr " + selector;
+        buildSelector: function (selector, direction) {
+            if(direction === 'ltr') {
+                return '.bar.direction-ltr ' + selector;
             } else {
                 return '[dir="' + direction + '"] ' + selector;
             }

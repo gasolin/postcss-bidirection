@@ -9,7 +9,8 @@ const SUPPORT_PROPS = ['float', 'clear', 'text-align', 'padding-inline-start', '
     'border-top-inline-start-radius', 'border-top-inline-end-radius',
     'border-bottom-inline-start-radius', 'border-bottom-inline-end-radius',
     'margin-inline-start', 'margin-inline-end',
-    'offset-inline-start', 'offset-inline-end'
+    'offset-inline-start', 'offset-inline-end',
+    'inset-inline-start', 'inset-inline-end'
 ];
 
 function log(...args) {
@@ -91,9 +92,11 @@ function processProps(decl, reverseFlag) {
     case 'margin-inline-end':
         decl.prop = 'margin-' + end;
         break;
+    case 'inset-inline-start':
     case 'offset-inline-start':
         decl.prop = start;
         break;
+    case 'inset-inline-end':
     case 'offset-inline-end':
         decl.prop = end;
         break;

@@ -1,3 +1,7 @@
+2.7 2018/08/24
+
+* support renamed inset-inline-(start/end) properties
+
 2.6 2017/11/23
 
 * support custom output via pass the `buildSelector` option, thanks @rolfen
