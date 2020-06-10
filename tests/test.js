@@ -8,7 +8,7 @@ function read(name) {
     function _read(ele) {
         return fs.readFileSync(`./tests/fixtures/${ele}.css`, {
             encoding: 'utf8'
-        });
+        }).replace(/\r\n/g, '\n');
     }
     const input = _read(`${name}-input`);
     const output = _read(`${name}-output`);
@@ -18,7 +18,7 @@ function read(name) {
 
 
 function run(t, input, output, opts = { }) {
-    return postcss([ plugin(opts) ]).process(input)
+    return postcss([ plugin(opts) ]).process(input, { from: undefined })
         .then(result => {
             t.deepEqual(result.css, output);
             t.is(result.warnings().length, 0);
