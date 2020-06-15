@@ -1,4 +1,4 @@
-2.7.1 2020/06/15
+2.7.2 2020/06/15
 
 * Update ava & postcss, thanks @Gregoor
 * (fix windows test) Replace CRLF with LF when loading fixtures, thanks @Gregoor
