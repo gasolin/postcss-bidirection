@@ -1,3 +1,9 @@
+2.7.1 2020/06/15
+
+* Update ava & postcss, thanks @Gregoor
+* (fix windows test) Replace CRLF with LF when loading fixtures, thanks @Gregoor
+* simplify test definition
+
 2.7 2018/08/24
 
 * support renamed inset-inline-(start/end) properties
